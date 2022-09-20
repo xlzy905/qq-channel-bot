@@ -14,7 +14,7 @@ const qqBotclient = createOpenAPI(qqBotConfig);
 export class WsStartGateway {
     constructor(private readonly postService: PostService) { }
 
-    // SubscribeMessage里面的字符串代表事件订阅类型
+    // SubscribeMessage里面的字符串接收bindClientConnect方法内监听的事件
     @SubscribeMessage('PUBLIC_GUILD_MESSAGES')
     async publicGuildMessages(@MessageBody() data: any) {
         try {

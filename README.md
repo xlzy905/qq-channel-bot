@@ -60,3 +60,43 @@ $ npm run db:generate
 $ npm run start:dev
 ```
 
+## 说明
+
+/src/common/ws-adapter.ts 修改订阅事件
+
+```javascript
+bindClientConnect(server, callback: Function) {
+        server.on('READY', data => {
+            console.log('[READY] 事件接收 :', data);
+        })
+        server.on('PUBLIC_GUILD_MESSAGES', data => {
+            console.log('[PUBLIC_GUILD_MESSAGES] 事件接收 :', data);
+            callback(data)
+        })
+        server.on('GUILDS', data => {
+            console.log('[GUILDS] 事件接收 :', data);
+            callback(data)
+        })
+ }
+```
+
+/src/module/events.gateway.ts  接收对应事件进行指令处理
+
+```javascript
+// SubscribeMessage里面的字符串接收bindClientConnect方法内监听的事件
+@SubscribeMessage('PUBLIC_GUILD_MESSAGES')
+   async publicGuildMessages(@MessageBody() data: any) {
+        try {
+            const { eventType } = data
+            // 机器人被@事件
+            if (eventType === 'AT_MESSAGE_CREATE') {
+                return
+            }
+            return
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+```
+
