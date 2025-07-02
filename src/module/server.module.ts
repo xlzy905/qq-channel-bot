@@ -1,14 +1,10 @@
-/*
-https://docs.nestjs.com/modules
-*/
-
-import { Module } from '@nestjs/common';
-import { PostService } from './post/post.service'
-import { PrismaService } from '../prisma/prisma.service'
-import { WsStartGateway } from './events.gateway'
+import { Module } from "@nestjs/common";
+import { PrismaService } from "../prisma/prisma.service";
+import { WsStartGateway } from "./events.gateway";
+import { PostService } from "./post/post.service";
 
 @Module({
-    imports: [],
-    providers: [PostService, PrismaService, WsStartGateway]
+	imports: [],
+	providers: [PostService, PrismaService, WsStartGateway],
 })
-export class ServerModule { }
+export class ServerModule {}
